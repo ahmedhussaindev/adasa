@@ -171,7 +171,9 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-orange-500"></span>
                 الأحدث
               </div>
-              <h2 className="text-white text-4xl md:text-5xl font-bold">أحدث المقالات</h2>
+              <h2 className="text-white text-4xl md:text-5xl font-bold">
+                أحدث المقالات
+              </h2>
               <p className="text-[#888] mt-3 text-lg">
                 محتوى جديد طازج من المطبعة
               </p>

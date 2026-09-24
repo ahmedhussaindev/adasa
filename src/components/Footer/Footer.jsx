@@ -21,20 +21,37 @@ export default function Footer() {
             </p>
 
             {/* Social */}
-            <div className="flex gap-3 mt-7">
-              <a className="social-btn">
+            <div className="flex items-center gap-2 mt-7">
+              <a
+                href="https://twitter.com/adasah"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-[#161616] border border-[#262626] hover:bg-linear-to-br hover:from-orange-500 hover:to-orange-600 hover:border-transparent rounded-xl flex items-center justify-center text-neutral-500 hover:text-white transition-all duration-300 hover:scale-110"
+              >
                 <i className="fa-brands fa-x-twitter"></i>
               </a>
-
-              <a className="social-btn">
+              <a
+                href="https://github.com/adasah"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-[#161616] border border-[#262626] hover:bg-linear-to-br hover:from-orange-500 hover:to-orange-600 hover:border-transparent rounded-xl flex items-center justify-center text-neutral-500 hover:text-white transition-all duration-300 hover:scale-110"
+              >
                 <i className="fa-brands fa-github"></i>
               </a>
-
-              <a className="social-btn">
-                <i className="fa-brands fa-linkedin"></i>
+              <a
+                href="https://linkedin.com/company/adasah"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-[#161616] border border-[#262626] hover:bg-linear-to-br hover:from-orange-500 hover:to-orange-600 hover:border-transparent rounded-xl flex items-center justify-center text-neutral-500 hover:text-white transition-all duration-300 hover:scale-110"
+              >
+                <i className="fa-brands fa-linkedin-in"></i>
               </a>
-
-              <a className="social-btn">
+              <a
+                href="https://youtube.com/@adasah"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-[#161616] border border-[#262626] hover:bg-linear-to-br hover:from-orange-500 hover:to-orange-600 hover:border-transparent rounded-xl flex items-center justify-center text-neutral-500 hover:text-white transition-all duration-300 hover:scale-110"
+              >
                 <i className="fa-brands fa-youtube"></i>
               </a>
             </div>
@@ -80,13 +97,39 @@ export default function Footer() {
               <span className="inline-block w-8 h-0.5 bg-linear-to-r from-orange-500 to-yellow-500 rounded-full ml-2 mb-1"></span>
               التصنيفات
             </h3>
+
             <div className="flex flex-col gap-6 text-[#777]">
-              <Link className="hover:text-orange-500 transition">إضاءة</Link>
-              <Link className="hover:text-orange-500 transition">بورتريه</Link>
-              <Link className="hover:text-orange-500 transition">
-                مناظر طبيعية
+              <Link
+                to="/blog?category=إضاءة"
+                className="group hover:text-orange-500 transition"
+              >
+                إضاءة
+                <i className="fa-solid fa-chevron-left text-xs mr-3 opacity-0 group-hover:opacity-100 transition"></i>
               </Link>
-              <Link className="hover:text-orange-500 transition">تقنيات</Link>
+
+              <Link
+                to="/blog?category=بورتريه"
+                className="group hover:text-orange-500 transition"
+              >
+                بورتريه
+                <i className="fa-solid fa-chevron-left text-xs mr-3 opacity-0 group-hover:opacity-100 transition"></i>
+              </Link>
+
+              <Link
+                to="/blog?category=مناظر طبيعية"
+                className="group hover:text-orange-500 transition"
+              >
+                مناظر طبيعية
+                <i className="fa-solid fa-chevron-left text-xs mr-3 opacity-0 group-hover:opacity-100 transition"></i>
+              </Link>
+
+              <Link
+                to="/blog?category=تقنيات"
+                className="group hover:text-orange-500 transition"
+              >
+                تقنيات
+                <i className="fa-solid fa-chevron-left text-xs mr-3 opacity-0 group-hover:opacity-100 transition"></i>
+              </Link>
             </div>
           </div>
 

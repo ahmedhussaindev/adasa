@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function HomeArticleCard({ post }) {
+export default function HomeArticleCard({ post , setSlug  }) {
   return (
     <Link to={`/blog/${post.slug}`} className="block">
       <article

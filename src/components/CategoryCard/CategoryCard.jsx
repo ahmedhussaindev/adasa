@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 export default function CategoryCard({ category }) {
   return (
-    <div
+     <Link to={`/blog?category=${category.name}`}
       className="group relative bg-[#151515] border border-[#303030] rounded-2xl p-6
       cursor-pointer overflow-hidden hover:-translate-y-2 hover:border-orange-500
       hover:bg-linear-to-br hover:from-orange-500 hover:to-amber-400 transition-all duration-300"
@@ -32,6 +33,6 @@ export default function CategoryCard({ category }) {
       >
         <i className="fa-solid fa-chevron-left"></i>
       </div>
-    </div>
+    </Link>
   );
 }

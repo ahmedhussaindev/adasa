@@ -4,7 +4,11 @@ import GridArticleCard from "../../components/ArticleCard/GridArticleCard/GridAr
 import ListArticleCard from "../../components/ArticleCard/ListArticleCard/ListArticleCard";
 export default function Blog() {
   const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("الكل");
+  {/*=======================WITH SOME HELP FROM AI=======================*/}
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("category");
+  const [activeCategory, setActiveCategory] = useState(category || "الكل");
+  {/*====================================================================*/}
   const [view, setView] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const categories = [
@@ -23,11 +27,17 @@ export default function Blog() {
   });
 
   const postsPerPage = 6;
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const startIndex = (currentPage - 1) * postsPerPage;
   const currentPosts = filteredPosts.slice(
     startIndex,
     startIndex + postsPerPage,
   );
+
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
 
   return (
     <>
@@ -54,7 +64,10 @@ export default function Blog() {
         </div>
       </section>
 
-      <section dir="rtl" className="bg-[#090909] border-b border-[#222]">
+      <section
+        dir="rtl"
+        className="bg-[#090909] border-b border-[#222] sticky top-22 z-10"
+      >
         <div className="max-w-367.5 mx-auto lg:px-20 md:px-6 px-4 py-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
             {/* Search */}
@@ -116,31 +129,46 @@ export default function Blog() {
                 </>
               )}
             </p>
-            <div className="flex items-center bg-[#151515] border border-[#303030] rounded-xl p-1">
-              <button
-                onClick={() => setView("grid")}
-                className={`w-10 h-10 rounded-lg transition duration-300
+            <div className="flex items-center gap-5">
+              <div className="flex items-center bg-[#151515] border border-[#303030] rounded-xl p-1">
+                <button
+                  onClick={() => setView("grid")}
+                  className={`w-10 h-10 rounded-lg transition duration-300
             ${
               view === "grid"
                 ? "bg-orange-600 text-white"
                 : "text-[#777] hover:text-white"
             }
-          `}
-              >
-                <i className="fa-solid fa-grip"></i>
-              </button>
-              <button
-                onClick={() => setView("list")}
-                className={`w-10 h-10 rounded-lg transition duration-300
+            `}
+                >
+                  <i className="fa-solid fa-grip"></i>
+                </button>
+                <button
+                  onClick={() => setView("list")}
+                  className={`w-10 h-10 rounded-lg transition duration-300
             ${
               view === "list"
                 ? "bg-orange-600 text-white"
                 : "text-[#777] hover:text-white"
             }
-          `}
-              >
-                <i className="fa-solid fa-list"></i>
-              </button>
+            `}
+                >
+                  <i className="fa-solid fa-list"></i>
+                </button>
+              </div>
+              {(activeCategory !== "الكل" || search !== "") && (
+                <button
+                  onClick={() => {
+                    setActiveCategory("الكل");
+                    setSearch("");
+                    setCurrentPage(1);
+                  }}
+                  className="text-[#777] hover:text-orange-500 transition"
+                >
+                  <i className="fa-solid fa-xmark ml-2"></i>
+                  مسح الفلاتر
+                </button>
+              )}
             </div>
           </div>
 
@@ -152,7 +180,7 @@ export default function Blog() {
                 : "flex flex-col gap-6"
             }
           >
-            {filteredPosts.map((post) =>
+            {currentPosts.map((post) =>
               view === "grid" ? (
                 <GridArticleCard key={post.id} post={post} />
               ) : (
@@ -160,6 +188,52 @@ export default function Blog() {
               ),
             )}
           </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex flex-col items-center gap-4 mt-10">
+              <div className="flex items-center gap-2">
+                {/* Previous */}
+                <button
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="w-10 h-10 bg-[#151515] border border-[#303030] rounded-lg text-[#777] hover:text-orange-500
+                   hover:border-orange-500 disabled:opacity-30 disabled:hover:text-[#777] disabled:hover:border-[#303030] transition"
+                >
+                  <i className="fa-solid fa-chevron-right"></i>
+                </button>
+                {/* Pages */}
+                {pages.map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-10 h-10 rounded-lg border transition
+            ${
+              currentPage === page
+                ? "bg-orange-600 border-orange-600 text-white"
+                : "bg-[#151515] border-[#303030] text-[#777] hover:border-orange-500 hover:text-orange-500"
+            }
+          `}
+                  >
+                    {page}
+                  </button>
+                ))}
+
+                {/* Next */}
+                <button
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="w-10 h-10 bg-[#151515] border border-[#303030] rounded-lg text-[#777] hover:text-orange-500
+                hover:border-orange-500 disabled:opacity-30 disabled:hover:text-[#777] disabled:hover:border-[#303030] transition"
+                >
+                  <i className="fa-solid fa-chevron-left"></i>
+                </button>
+              </div>
+              <p className="text-[#666] text-sm">
+                صفحة {currentPage} من {totalPages}
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </>
